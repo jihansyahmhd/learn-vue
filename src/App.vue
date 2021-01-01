@@ -1,38 +1,28 @@
 <template>
   <div>
-      <app-header v-bind:title="title" v-on:changedTitle="updateTitle($event)"></app-header>
-      <app-ninjas v-bind:ninjas='ninjadata'></app-ninjas>
-      <app-footer v-bind:title="title"></app-footer>
+    <keep-alive>
+     <component v-bind:is="component"></component>
+    </keep-alive>
+    <button @click="component='form-one'">Show Form One</button>
+    <button @click="component='form-two'">Show Form Two</button>
   </div>
 </template>
 
 <script>
-import Header from './components/Header.vue';
-import Footer from './components/Footer.vue';
-import Ninjas from './components/Ninjas.vue';
+import formOne from './components/formOne.vue'
+import formTwo from './components/formTwo.vue'
 
 export default {
   components:{
-    'app-header':Header,
-    'app-footer':Footer,
-    'app-ninjas':Ninjas
+    'form-one':formOne,
+    'form-two':formTwo
   },
   data () {
     return {
-      ninjadata: [
-            {name: 'Ryu', speciality: 'Vue Components', show: false},
-            {name: 'Crystal', speciality: 'HTML Wizardry', show: false},
-            {name: 'Hitoshi', speciality: 'Click Events', show: false},
-            {name: 'Tango', speciality: 'Conditionals', show: false},
-            {name: 'Kami', speciality: 'Webpack', show: false},
-            {name: 'Yoshi', speciality: 'Data Diggin', show: false}
-        ],
-        title:'Vue ninjas'
+      component:'form-one'
     }
   },methods:{
-      updateTitle(updatedTitle){
-        this.title=updatedTitle
-      }
+     
   }
 }
 </script>
